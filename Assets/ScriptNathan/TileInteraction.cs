@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TileInteraction : MonoBehaviour
 {
-    public Sprite spriteAvecDéchets;
+    public Sprite spriteAvecDechets;
     public Sprite spritePropre;
     public Sprite spriteSolArrose;
     public Sprite spriteGraine;
@@ -21,18 +21,18 @@ public class TileInteraction : MonoBehaviour
     // Gestion de l'inventaire
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
-    // Compteur global pour le blé récolté
+    // Compteur global pour le ble recolte
     public static int totalWheatRecolte = 0;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = spriteAvecDéchets;
+        spriteRenderer.sprite = spriteAvecDechets;
 
         // Initialisation de l'inventaire
         inventory.Add("Wheat", 0);
 
-        // Écoute les changements de jour
+        // ecoute les changements de jour
         TimeManager.instance.OnNewDay += PasserUnJour;
     }
 
@@ -121,7 +121,7 @@ public class TileInteraction : MonoBehaviour
         {
             joursDepuisPlantation++;
 
-            if (joursDepuisPlantation >= 3) // La plante met 3 jours à pousser
+            if (joursDepuisPlantation >= 3) // La plante met 3 jours a pousser
             {
                 planteMature = true;
                 spriteRenderer.sprite = spritePlanteMature;
@@ -136,18 +136,18 @@ public class TileInteraction : MonoBehaviour
         {
             planteMature = false;
             aGraine = false;
-            estArrose = false;  // Réinitialise l'arrosage
+            estArrose = false;  // Reinitialise l'arrosage
             spriteRenderer.sprite = spritePropre;
 
-            // Ajout à l'inventaire
+            // Ajout a l'inventaire
             AjouterItem("Wheat", 1);
 
-            // Mise à jour du compteur global pour le blé récolté
+            // Mise a jour du compteur global pour le ble recolte
             totalWheatRecolte += 1;
 
             Debug.Log("Plante recoltee ! Vous avez collecté 1 Wheat.");
             Debug.Log("Terrain pret a etre arrose.");
-            Debug.Log($"Total Wheat récolte: {totalWheatRecolte}"); // Affiche le total global de blé récolté
+            Debug.Log($"Total Wheat récolte: {totalWheatRecolte}"); // Affiche le total global de ble recolte
         }
         else
         {
