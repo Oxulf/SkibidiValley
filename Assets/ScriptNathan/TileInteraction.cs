@@ -22,7 +22,7 @@ public class TileInteraction : MonoBehaviour
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
     // Compteur global pour le blé récolté
-    public static int totalBléRécolté = 0;
+    public static int totalWheatRecolte = 0;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class TileInteraction : MonoBehaviour
         spriteRenderer.sprite = spriteAvecDéchets;
 
         // Initialisation de l'inventaire
-        inventory.Add("Blé", 0);
+        inventory.Add("Wheat", 0);
 
         // Écoute les changements de jour
         TimeManager.instance.OnNewDay += PasserUnJour;
@@ -40,19 +40,19 @@ public class TileInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && JoueurEstProche() && !interactionEnCours)
         {
-            StartCoroutine(GérerInteractionAvecDelai());
+            StartCoroutine(GererInteractionAvecDelai());
         }
     }
 
-    IEnumerator GérerInteractionAvecDelai()
+    IEnumerator GererInteractionAvecDelai()
     {
         interactionEnCours = true;
-        GérerInteraction();
+        GererInteraction();
         yield return new WaitForSeconds(5f);
         interactionEnCours = false;
     }
 
-    void GérerInteraction()
+    void GererInteraction()
     {
         if (!estNettoye)
         {
@@ -82,7 +82,7 @@ public class TileInteraction : MonoBehaviour
         {
             estNettoye = true;
             spriteRenderer.sprite = spritePropre;
-            Debug.Log("Terrain nettoyé !");
+            Debug.Log("Terrain nettoye !");
         }
     }
 
@@ -92,7 +92,7 @@ public class TileInteraction : MonoBehaviour
         {
             estArrose = true;
             spriteRenderer.sprite = spriteSolArrose;
-            Debug.Log("Sol arrosé !");
+            Debug.Log("Sol arrose !");
         }
         else if (!estNettoye)
         {
@@ -107,11 +107,11 @@ public class TileInteraction : MonoBehaviour
             aGraine = true;
             joursDepuisPlantation = 0;
             spriteRenderer.sprite = spriteGraine;
-            Debug.Log("Graine plantée !");
+            Debug.Log("Graine plantee !");
         }
         else if (!estArrose)
         {
-            Debug.Log("Impossible de planter : le sol n'est pas arrosé !");
+            Debug.Log("Impossible de planter : le sol n'est pas arrose !");
         }
     }
 
@@ -140,18 +140,18 @@ public class TileInteraction : MonoBehaviour
             spriteRenderer.sprite = spritePropre;
 
             // Ajout à l'inventaire
-            AjouterItem("Blé", 1);
+            AjouterItem("Wheat", 1);
 
             // Mise à jour du compteur global pour le blé récolté
-            totalBléRécolté += 1;
+            totalWheatRecolte += 1;
 
-            Debug.Log("Plante récoltée ! Vous avez collecté 1 Blé.");
-            Debug.Log("Terrain prêt à être arrosé.");
-            Debug.Log($"Total Blé récolté: {totalBléRécolté}"); // Affiche le total global de blé récolté
+            Debug.Log("Plante recoltee ! Vous avez collecté 1 Wheat.");
+            Debug.Log("Terrain pret a etre arrose.");
+            Debug.Log($"Total Wheat récolte: {totalWheatRecolte}"); // Affiche le total global de blé récolté
         }
         else
         {
-            Debug.Log("Rien à récolter !");
+            Debug.Log("Rien a recolter !");
         }
     }
 
@@ -172,7 +172,7 @@ public class TileInteraction : MonoBehaviour
             inventory[item] = quantite;
         }
 
-        Debug.Log($"{quantite} {item}(s) ajouté(s) à l'inventaire. Total: {inventory[item]}.");
+        Debug.Log($"{quantite} {item}(s) ajoute(s) a l'inventaire. Total: {inventory[item]}.");
     }
 
     public void AfficherInventaire()
