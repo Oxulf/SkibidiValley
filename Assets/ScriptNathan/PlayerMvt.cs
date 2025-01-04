@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         // Initialisation du Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f; // Désactiver la gravité
+        rb.freezeRotation = true; // Empêcher la rotation du Rigidbody2D
     }
 
     void Update()
@@ -28,8 +29,7 @@ public class PlayerMovement : MonoBehaviour
         // Bloquer le mouvement diagonal
         if (horizontal != 0 && vertical != 0)
         {
-            // Si deux touches sont appuyées, on ignore vertical par défaut
-            vertical = 0;
+            vertical = 0; // On privilégie le déplacement horizontal
         }
 
         // Mettre à jour le vecteur de mouvement
@@ -58,5 +58,8 @@ public class PlayerMovement : MonoBehaviour
     {
         // Appliquer le mouvement au Rigidbody
         rb.velocity = movement.normalized * moveSpeed;
+
+        // Empêcher toute modification accidentelle de la rotation
+        transform.rotation = Quaternion.identity; // Garde la rotation fixe
     }
 }
