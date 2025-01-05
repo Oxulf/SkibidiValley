@@ -145,9 +145,9 @@ public class TileInteraction : MonoBehaviour
             // Mise a jour du compteur global pour le ble recolte
             totalWheatRecolte += 1;
 
-            Debug.Log("Plante recoltee ! Vous avez collecté 1 Wheat.");
+            Debug.Log("Plante recoltee ! Vous avez collecte 1 Wheat.");
             Debug.Log("Terrain pret a etre arrose.");
-            Debug.Log($"Total Wheat récolte: {totalWheatRecolte}"); // Affiche le total global de ble recolte
+            Debug.Log($"Total Wheat rï¿½colte: {totalWheatRecolte}"); // Affiche le total global de ble recolte
         }
         else
         {

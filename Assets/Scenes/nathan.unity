@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "spriteAvecD\xE9chets": {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
+  spriteAvecDechets: {fileID: 0}
   spritePropre: {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "spriteAvecD\xE9chets": {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
+  spriteAvecDechets: {fileID: 0}
   spritePropre: {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "spriteAvecD\xE9chets": {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
+  spriteAvecDechets: {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
   spritePropre: {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
