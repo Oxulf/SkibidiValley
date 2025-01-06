@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public GameObject inventoryCanvas; // Reference au Canvas de l'inventaire
-    public Transform itemsContainer;  // Reference au conteneur d'items
-    public GameObject itemPrefab;     // Prefab de l'item a ajouter
+    public GameObject backgroundCanvas; // Référence au Canvas du background
+    public GameObject itemsCanvas;      // Référence au Canvas des items
+    public Transform itemsContainer;    // Référence au conteneur d'items dans le itemsCanvas
+    public GameObject itemPrefab;       // Prefab de l'item à ajouter
 
-    private bool isInventoryOpen = false; // Etat de l'inventaire (ouvert/ferme)
+    private bool isInventoryOpen = false; // État de l'inventaire (ouvert/fermé)
+
+    void Start()
+    {
+        // Assurez-vous que l'inventaire est fermé au début
+        backgroundCanvas.SetActive(false);
+        itemsCanvas.SetActive(false);
+    }
 
     void Update()
     {
@@ -28,14 +37,29 @@ public class PlayerInventory : MonoBehaviour
     void ToggleInventory()
     {
         isInventoryOpen = !isInventoryOpen;
-        inventoryCanvas.SetActive(isInventoryOpen);
+
+        // Activer/Désactiver les deux Canvas
+        backgroundCanvas.SetActive(isInventoryOpen);
+        itemsCanvas.SetActive(isInventoryOpen);
     }
 
     void AddItemToInventory()
     {
-        // Créer un nouvel item a partir du prefab
         GameObject newItem = Instantiate(itemPrefab, itemsContainer);
 
-        Debug.Log("Item ajoute a l'inventaire !");
+        RectTransform rt = newItem.GetComponent<RectTransform>();
+        if (rt == null)
+        {
+            Debug.LogError("Le prefab d'item doit avoir un RectTransform !");
+            return;
+        }
+
+        rt.anchoredPosition = Vector2.zero; // Centré dans le parent
+        rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
+
+        // Forcez la mise à jour du layout
+        LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
+
+        Debug.Log($"Item ajouté : Parent = {newItem.transform.parent.name}, Position = {rt.anchoredPosition}");
     }
 }
