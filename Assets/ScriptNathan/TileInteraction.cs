@@ -24,6 +24,9 @@ public class TileInteraction : MonoBehaviour
     // Compteur global pour le ble recolte
     public static int totalWheatRecolte = 0;
 
+    // Référence au script PlayerInventory
+    public PlayerInventory playerInventory;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,7 +35,7 @@ public class TileInteraction : MonoBehaviour
         // Initialisation de l'inventaire
         inventory.Add("Wheat", 0);
 
-        // ecoute les changements de jour
+        // Ecoute les changements de jour
         TimeManager.instance.OnNewDay += PasserUnJour;
     }
 
@@ -139,19 +142,22 @@ public class TileInteraction : MonoBehaviour
             estArrose = false;  // Reinitialise l'arrosage
             spriteRenderer.sprite = spritePropre;
 
-            // Ajout a l'inventaire
+            // Ajout à l'inventaire
             AjouterItem("Wheat", 1);
 
-            // Mise a jour du compteur global pour le ble recolte
+            // Mise à jour du compteur global pour le ble récolté
             totalWheatRecolte += 1;
 
-            Debug.Log("Plante recoltee ! Vous avez collecte 1 Wheat.");
-            Debug.Log("Terrain pret a etre arrose.");
-            Debug.Log($"Total Wheat r�colte: {totalWheatRecolte}"); // Affiche le total global de ble recolte
+            Debug.Log("Plante récoltée ! Vous avez collecté 1 Wheat.");
+            Debug.Log("Terrain prêt à être arrosé.");
+            Debug.Log($"Total Wheat récolté: {totalWheatRecolte}");
+
+            // Appel à la méthode pour afficher l'item dans l'inventaire
+            playerInventory.AddItemToInventory();  // Ajoute l'item dans l'inventaire visuel
         }
         else
         {
-            Debug.Log("Rien a recolter !");
+            Debug.Log("Rien à récolter !");
         }
     }
 
@@ -172,7 +178,7 @@ public class TileInteraction : MonoBehaviour
             inventory[item] = quantite;
         }
 
-        Debug.Log($"{quantite} {item}(s) ajoute(s) a l'inventaire. Total: {inventory[item]}.");
+        Debug.Log($"{quantite} {item}(s) ajouté(s) à l'inventaire. Total: {inventory[item]}.");
     }
 
     public void AfficherInventaire()

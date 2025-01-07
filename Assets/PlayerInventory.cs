@@ -27,7 +27,7 @@ public class PlayerInventory : MonoBehaviour
             ToggleInventory();
         }
 
-        // Ajouter un item avec F
+        // Ajouter un item avec F (si nécessaire pour le débug)
         if (Input.GetKeyDown(KeyCode.F))
         {
             AddItemToInventory();
@@ -43,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
         itemsCanvas.SetActive(isInventoryOpen);
     }
 
-    void AddItemToInventory()
+    public void AddItemToInventory()
     {
         GameObject newItem = Instantiate(itemPrefab, itemsContainer);
 

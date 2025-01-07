@@ -846,11 +846,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteAvecDechets: {fileID: 0}
+  spriteAvecDechets: {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
   spritePropre: {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
   spritePlanteMature: {fileID: 21300000, guid: 4b61756454002074cbd128921eede89d, type: 3}
+  playerInventory: {fileID: 290168707}
 --- !u!61 &1051521908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -994,11 +995,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteAvecDechets: {fileID: 0}
+  spriteAvecDechets: {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
   spritePropre: {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
   spritePlanteMature: {fileID: 21300000, guid: 4b61756454002074cbd128921eede89d, type: 3}
+  playerInventory: {fileID: 290168707}
 --- !u!61 &1687130780
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1259,6 +1261,7 @@ MonoBehaviour:
   spriteSolArrose: {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   spriteGraine: {fileID: 21300000, guid: af4e984e6c831594dbfea7f306c03121, type: 3}
   spritePlanteMature: {fileID: 21300000, guid: 4b61756454002074cbd128921eede89d, type: 3}
+  playerInventory: {fileID: 290168707}
 --- !u!1 &1973345950
 GameObject:
   m_ObjectHideFlags: 0
