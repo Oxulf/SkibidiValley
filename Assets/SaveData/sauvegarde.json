@@ -1,0 +1,20 @@
+{
+  "plantes": [
+    {
+      "nom": "",
+      "couleurs": [ "", "", "", "", "" ],
+      "quantiteGraines": -1
+    },
+    {
+      "nom": "",
+      "couleurs": [],
+      "quantiteGraines": 0
+    },
+    {
+      "nom": "Pensée",
+      "couleurs": [ "Rouge", "Bleu", "Jaune" ],
+      "quantiteGraines": 10
+    }
+  ],
+  "argent": 41
+}
