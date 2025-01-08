@@ -18161,7 +18161,7 @@ Transform:
   m_GameObject: {fileID: 410144976}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.47163, y: 2.9155293, z: -15.801168}
+  m_LocalPosition: {x: -39.47163, y: 2.78, z: -15.801168}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46823,6 +46823,7 @@ GameObject:
   - component: {fileID: 1051521909}
   - component: {fileID: 1051521908}
   - component: {fileID: 1051521907}
+  - component: {fileID: 1051521911}
   m_Layer: 7
   m_Name: sol (2)
   m_TagString: Untagged
@@ -46850,10 +46851,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
   - {fileID: 21300000, guid: 363c114c4161410478b11577b667ce9d, type: 3}
   - {fileID: 21300000, guid: e90e5b9b39a55a944967ddd682d6b547, type: 3}
-  - {fileID: 21300000, guid: 0bb3f8fbec7bea4408fbbd1e71011ff6, type: 3}
   cropName: Wheat
-  daysPerStage: 0100000001000000010000000100000001000000010000000100000001000000
-  itemPrefab: {fileID: 6833089984901474080, guid: e5e71cdff5eeabf4eaae49cdbd14e3c8, type: 3}
+  daysPerStage: 010000000100000001000000010000000100000001000000
+  itemPrefab: {fileID: 0}
 --- !u!61 &1051521908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -46960,12 +46960,26 @@ Transform:
   m_GameObject: {fileID: 1051521906}
   serializedVersion: 2
   m_LocalRotation: {x: 0.003275526, y: -0, z: -0, w: 0.99999464}
-  m_LocalPosition: {x: 11, y: -7, z: 0}
+  m_LocalPosition: {x: 11, y: -3, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.375, y: 0, z: 0}
+--- !u!114 &1051521911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051521906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbe0f33f4292164e810918d19292387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 10
+  Height: 10
 --- !u!1 &1052217013
 GameObject:
   m_ObjectHideFlags: 0
@@ -52209,7 +52223,7 @@ Transform:
   m_GameObject: {fileID: 1180328844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.982629, y: 5.015471, z: 15.801168}
+  m_LocalPosition: {x: 12.982629, y: 5.015471, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73576,6 +73590,7 @@ GameObject:
   - component: {fileID: 1687130781}
   - component: {fileID: 1687130780}
   - component: {fileID: 1687130779}
+  - component: {fileID: 1687130783}
   m_Layer: 7
   m_Name: sol (1)
   m_TagString: Untagged
@@ -73713,12 +73728,26 @@ Transform:
   m_GameObject: {fileID: 1687130778}
   serializedVersion: 2
   m_LocalRotation: {x: 0.003275526, y: -0, z: -0, w: 0.99999464}
-  m_LocalPosition: {x: 11, y: -3, z: 0}
+  m_LocalPosition: {x: 11, y: -7, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.375, y: 0, z: 0}
+--- !u!114 &1687130783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687130778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbe0f33f4292164e810918d19292387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 20
+  Height: 20
 --- !u!1 &1687495946
 GameObject:
   m_ObjectHideFlags: 0
@@ -83405,7 +83434,7 @@ Transform:
   m_GameObject: {fileID: 1922037851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.52063, y: 4.2545295, z: -15.801168}
+  m_LocalPosition: {x: -39.43, y: 4.2545295, z: -15.801168}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84815,6 +84844,7 @@ GameObject:
   - component: {fileID: 1953017436}
   - component: {fileID: 1953017438}
   - component: {fileID: 1953017439}
+  - component: {fileID: 1953017440}
   m_Layer: 7
   m_Name: sol
   m_TagString: Untagged
@@ -84958,6 +84988,20 @@ MonoBehaviour:
   cropName: "Pens\xE9es"
   daysPerStage: 01000000010000000100000001000000010000000100000001000000
   itemPrefab: {fileID: 1890969393354997917, guid: 0e5142f677113b2409f35ce1927f3b2c, type: 3}
+--- !u!114 &1953017440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953017434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbe0f33f4292164e810918d19292387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 20
+  Height: 20
 --- !u!1 &1960416814
 GameObject:
   m_ObjectHideFlags: 0
