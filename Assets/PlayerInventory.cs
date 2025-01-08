@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     public GameObject backgroundCanvas; // Référence au Canvas du background
     public GameObject itemsCanvas;      // Référence au Canvas des items
     public Transform itemsContainer;    // Référence au conteneur d'items dans le itemsCanvas
-    public GameObject itemPrefab;       // Prefab de l'item à ajouter
+    public List<GameObject> collectiblePrefabs; // Liste des prefabs récoltables
 
     private bool isInventoryOpen = false; // État de l'inventaire (ouvert/fermé)
 
@@ -37,30 +37,31 @@ public class PlayerInventory : MonoBehaviour
         itemsCanvas.SetActive(isInventoryOpen);
     }
 
-    public void AddItemToInventory(string itemName)
+    public void AddItemToInventory(GameObject prefab)
     {
-        GameObject newItem = Instantiate(itemPrefab, itemsContainer);
-
-        // Ajoutez le nom de l'item dans le visuel
-        Text itemText = newItem.GetComponentInChildren<Text>();
-        if (itemText != null)
+        if (collectiblePrefabs.Contains(prefab))
         {
-            itemText.text = itemName; // Affiche le nom de l'item
-        }
+            // Crée une instance de l’item dans l’UI
+            GameObject newItem = Instantiate(prefab, itemsContainer);
 
-        RectTransform rt = newItem.GetComponent<RectTransform>();
-        if (rt == null)
+            RectTransform rt = newItem.GetComponent<RectTransform>();
+            if (rt == null)
+            {
+                Debug.LogError("Le prefab d'item doit avoir un RectTransform !");
+                return;
+            }
+
+            rt.anchoredPosition = Vector2.zero; // Centré dans le parent
+            rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
+
+            // Forcez la mise à jour du layout
+            LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
+
+            Debug.Log($"Item ajouté : {prefab.name}");
+        }
+        else
         {
-            Debug.LogError("Le prefab d'item doit avoir un RectTransform !");
-            return;
+            Debug.LogWarning($"Le prefab {prefab.name} n'est pas dans la liste des items récoltables !");
         }
-
-        rt.anchoredPosition = Vector2.zero; // Centré dans le parent
-        rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
-
-        // Forcez la mise à jour du layout
-        LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
-
-        Debug.Log($"Item ajouté : {itemName}");
     }
 }

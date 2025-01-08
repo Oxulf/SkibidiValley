@@ -12,6 +12,7 @@ public class TileInteraction : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private bool interactionEnCours = false;
+    public GameObject itemPrefab; // Prefab associé à cette culture
 
     // Gestion de l'inventaire
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
@@ -159,22 +160,18 @@ public class TileInteraction : MonoBehaviour
             cropState = CropState.Clean;
             spriteRenderer.sprite = cropStages[1]; // Retour à l'état propre
 
-            // Ajoute l'item dans l'inventaire du joueur
-            if (playerInventory != null)
+            // Ajoute l'objet récolté à l'inventaire
+            if (playerInventory != null && itemPrefab != null)
             {
-                playerInventory.AddItemToInventory(cropName);
+                playerInventory.AddItemToInventory(itemPrefab); // Passe le prefab
                 Debug.Log($"{cropName} récolté et ajouté à l'inventaire !");
             }
             else
             {
-                Debug.LogWarning("Aucun inventaire global trouvé pour ajouter l'item.");
+                Debug.LogWarning("Aucun inventaire ou prefab trouvé !");
             }
 
-            AjouterItem(cropName, 1); // Gère le stockage interne
-        }
-        else
-        {
-            Debug.Log("Rien à récolter !");
+            AjouterItem(cropName, 1); // Gestion interne
         }
     }
 
