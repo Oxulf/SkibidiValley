@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 9a07d468be2b7994f89b3489dea6292c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - seedSprite: {instanceID: 0}
+  - seedPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
