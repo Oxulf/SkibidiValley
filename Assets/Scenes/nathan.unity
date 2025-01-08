@@ -76343,7 +76343,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 363c114c4161410478b11577b667ce9d, type: 3}
   - {fileID: 21300000, guid: e90e5b9b39a55a944967ddd682d6b547, type: 3}
   - {fileID: 21300000, guid: 59789c40b030b554f91b72d54ff2a6e0, type: 3}
-  cropName: Wheat
+  cropName: "Pens\xE9es"
   daysPerStage: 01000000010000000100000001000000010000000100000001000000
 --- !u!1 &1960416814
 GameObject:

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TileInteraction : MonoBehaviour
 {
     public Sprite[] cropStages; // Array des sprites pour chaque étape
-    public string cropName = "Wheat"; // Nom de la culture
+    public string cropName = ""; // Nom de la culture
     public int[] daysPerStage; // Nombre de jours nécessaires par étape
     private int currentStage = 0; // Étape actuelle
 
@@ -87,14 +87,14 @@ public class TileInteraction : MonoBehaviour
     void Nettoyer()
     {
         cropState = CropState.Clean;
-        spriteRenderer.sprite = cropStages[1]; // Propre
+        spriteRenderer.sprite = cropStages[1];
         Debug.Log("Terrain nettoyé !");
     }
 
     void Arroser()
     {
         cropState = CropState.Watered;
-        spriteRenderer.sprite = cropStages[2]; // Sol arrosé
+        spriteRenderer.sprite = cropStages[2];
         Debug.Log("Sol arrosé !");
     }
 
@@ -102,7 +102,7 @@ public class TileInteraction : MonoBehaviour
     {
         cropState = CropState.Seeded;
         currentStage = 0;
-        spriteRenderer.sprite = cropStages[3]; // Graine
+        spriteRenderer.sprite = cropStages[3];
         Debug.Log("Graine plantée !");
     }
 
@@ -123,11 +123,10 @@ public class TileInteraction : MonoBehaviour
 
     IEnumerator ProgressionApresArrosage()
     {
-        // Affiche un message indiquant que la plante pousse
         Debug.Log("La plante est en train de pousser...");
 
         // Cooldown pour simuler le temps de croissance
-        yield return new WaitForSeconds(3f); // Temps d’attente de 3 secondes
+        yield return new WaitForSeconds(3f);
 
         // Passer à l’étape suivante après le délai
         currentStage++;
@@ -135,19 +134,19 @@ public class TileInteraction : MonoBehaviour
         if (currentStage == 1)
         {
             cropState = CropState.Growing;
-            spriteRenderer.sprite = cropStages[currentStage + 3]; // Sprite de la germination
+            spriteRenderer.sprite = cropStages[currentStage + 3];
             Debug.Log("La graine a germé !");
         }
         else if (currentStage == 2)
         {
             cropState = CropState.Flowering;
-            spriteRenderer.sprite = cropStages[currentStage + 3]; // Sprite de la floraison
+            spriteRenderer.sprite = cropStages[currentStage + 3];
             Debug.Log("La plante commence à fleurir !");
         }
         else if (currentStage == 3)
         {
             cropState = CropState.Harvestable;
-            spriteRenderer.sprite = cropStages[cropStages.Length - 1]; // Sprite de la plante mature
+            spriteRenderer.sprite = cropStages[cropStages.Length - 1];
             Debug.Log("La plante est prête à être récoltée !");
         }
     }
