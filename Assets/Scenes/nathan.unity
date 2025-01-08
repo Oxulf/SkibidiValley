@@ -7581,7 +7581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &179364006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12656,6 +12656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingItems:
   - prefab: {fileID: 3302833872393285307, guid: 3ac21616c8b5a604e884ff0ec82e2c02, type: 3}
+    quantity: 5
+  - prefab: {fileID: 927441650313012442, guid: 1d9e4ed47b2746d4780925bf89eb7d8f, type: 3}
     quantity: 5
   backgroundCanvas: {fileID: 416446327}
   itemsCanvas: {fileID: 846872315}
@@ -34684,14 +34686,14 @@ MonoBehaviour:
   - {fileID: 599159695}
   availableSeeds:
   - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
-  - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
+  - {fileID: 11400000, guid: a7e2c5a939fcbfa4b87a9f4779084cd7, type: 2}
+  - {fileID: 11400000, guid: 77544bb3248be064db39bdd9c17f5818, type: 2}
+  - {fileID: 11400000, guid: ebefe4b25f5cf9b49bcdf10b9893c937, type: 2}
+  - {fileID: 11400000, guid: d7bb60ca5b4f79f42b2f4c4888032db8, type: 2}
+  - {fileID: 11400000, guid: a2824d7d67f357f4fbe12908e0240da5, type: 2}
+  - {fileID: 11400000, guid: 5c09151b427da5245a52b7cf8da28ef1, type: 2}
+  - {fileID: 11400000, guid: 1e87fdb52bc743c42aa3e75344f826df, type: 2}
+  - {fileID: 11400000, guid: 6fa4632044bb8d2479e70fc1bf54993a, type: 2}
   - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
   - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
   - {fileID: 11400000, guid: 015ef9405d3a7cc4fa6e4f77977c964c, type: 2}
@@ -43648,11 +43650,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 0}
-  cropStages: []
+  playerInventory: {fileID: 290168707}
+  cropStages:
+  - {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
+  - {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
+  - {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
+  - {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
+  - {fileID: 21300000, guid: 363c114c4161410478b11577b667ce9d, type: 3}
+  - {fileID: 21300000, guid: e90e5b9b39a55a944967ddd682d6b547, type: 3}
+  - {fileID: 21300000, guid: 0bb3f8fbec7bea4408fbbd1e71011ff6, type: 3}
   cropName: Wheat
-  daysPerStage: 
-  itemPrefab: {fileID: 0}
+  daysPerStage: 0100000001000000010000000100000001000000010000000100000001000000
+  itemPrefab: {fileID: 6833089984901474080, guid: e5e71cdff5eeabf4eaae49cdbd14e3c8, type: 3}
 --- !u!61 &1051521908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -67927,11 +67936,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 0}
-  cropStages: []
+  playerInventory: {fileID: 290168707}
+  cropStages:
+  - {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
+  - {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
+  - {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
+  - {fileID: 21300000, guid: cb7481fcddda7ca4097203bd3f3239cd, type: 3}
+  - {fileID: 21300000, guid: 363c114c4161410478b11577b667ce9d, type: 3}
+  - {fileID: 21300000, guid: e90e5b9b39a55a944967ddd682d6b547, type: 3}
+  - {fileID: 21300000, guid: 7fa0afa39619ba14bab709ca40e4bf61, type: 3}
   cropName: Wheat
-  daysPerStage: 
-  itemPrefab: {fileID: 0}
+  daysPerStage: 01000000010000000100000001000000010000000100000001000000
+  itemPrefab: {fileID: 5527009442553696283, guid: 6437d2f8b53d564459b4dd717f942495, type: 3}
 --- !u!61 &1687130780
 BoxCollider2D:
   m_ObjectHideFlags: 0
