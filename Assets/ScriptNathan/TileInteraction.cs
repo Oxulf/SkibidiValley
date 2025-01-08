@@ -4,39 +4,41 @@ using System.Collections.Generic;
 
 public class TileInteraction : MonoBehaviour
 {
-    public Sprite spriteAvecDechets;
-    public Sprite spritePropre;
-    public Sprite spriteSolArrose;
-    public Sprite spriteGraine;
-    public Sprite spritePlanteMature;
+    public Sprite[] cropStages; // Array des sprites pour chaque étape
+    public string cropName = "Wheat"; // Nom de la culture
+    public int[] daysPerStage; // Nombre de jours nécessaires par étape
+    private int currentStage = 0; // Étape actuelle
 
     private SpriteRenderer spriteRenderer;
-    private bool estNettoye = false;
-    private bool estArrose = false;
-    private bool aGraine = false;
-    private bool planteMature = false;
-    private int joursDepuisPlantation = 0;
     private bool interactionEnCours = false;
 
     // Gestion de l'inventaire
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
-    // Compteur global pour le ble recolte
-    public static int totalWheatRecolte = 0;
+    // État actuel de la parcelle
+    private enum CropState
+    {
+        Dirty,
+        Clean,
+        Watered,
+        Seeded,
+        Growing,
+        Flowering,
+        Harvestable
+    }
 
-    // Référence au script PlayerInventory
-    public PlayerInventory playerInventory;
+    private CropState cropState = CropState.Dirty;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = spriteAvecDechets;
+        spriteRenderer.sprite = cropStages[0]; // Sprite initial (sale)
 
         // Initialisation de l'inventaire
-        inventory.Add("Wheat", 0);
-
-        // Ecoute les changements de jour
-        TimeManager.instance.OnNewDay += PasserUnJour;
+        if (!inventory.ContainsKey(cropName))
+        {
+            inventory.Add(cropName, 0);
+        }
     }
 
     void Update()
@@ -51,113 +53,115 @@ public class TileInteraction : MonoBehaviour
     {
         interactionEnCours = true;
         GererInteraction();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.5f); // Délai pour éviter une double interaction
         interactionEnCours = false;
     }
 
     void GererInteraction()
     {
-        if (!estNettoye)
+        switch (cropState)
         {
-            Nettoyer();
-        }
-        else if (!estArrose)
-        {
-            Arroser();
-        }
-        else if (!aGraine)
-        {
-            PlanterGraine();
-        }
-        else if (planteMature)
-        {
-            Recolter();
-        }
-        else
-        {
-            Debug.Log("Aucune interaction possible.");
+            case CropState.Dirty:
+                Nettoyer();
+                break;
+            case CropState.Clean:
+                Arroser();
+                break;
+            case CropState.Watered:
+                PlanterGraine();
+                break;
+            case CropState.Seeded:
+            case CropState.Growing:
+            case CropState.Flowering:
+                ArroserPourPousser();
+                break;
+            case CropState.Harvestable:
+                Recolter();
+                break;
+            default:
+                Debug.Log("Aucune interaction possible.");
+                break;
         }
     }
 
     void Nettoyer()
     {
-        if (!estNettoye)
-        {
-            estNettoye = true;
-            spriteRenderer.sprite = spritePropre;
-            Debug.Log("Terrain nettoye !");
-        }
+        cropState = CropState.Clean;
+        spriteRenderer.sprite = cropStages[1]; // Propre
+        Debug.Log("Terrain nettoyé !");
     }
 
     void Arroser()
     {
-        if (estNettoye && !estArrose)
-        {
-            estArrose = true;
-            spriteRenderer.sprite = spriteSolArrose;
-            Debug.Log("Sol arrose !");
-        }
-        else if (!estNettoye)
-        {
-            Debug.Log("Impossible d'arroser : le sol est sale !");
-        }
+        cropState = CropState.Watered;
+        spriteRenderer.sprite = cropStages[2]; // Sol arrosé
+        Debug.Log("Sol arrosé !");
     }
 
     void PlanterGraine()
     {
-        if (estArrose && !aGraine)
+        cropState = CropState.Seeded;
+        currentStage = 0;
+        spriteRenderer.sprite = cropStages[3]; // Graine
+        Debug.Log("Graine plantée !");
+    }
+
+    void ArroserPourPousser()
+    {
+        if (cropState == CropState.Seeded || cropState == CropState.Growing || cropState == CropState.Flowering)
         {
-            aGraine = true;
-            joursDepuisPlantation = 0;
-            spriteRenderer.sprite = spriteGraine;
-            Debug.Log("Graine plantee !");
+            Debug.Log($"Arrosage effectué pour l'état : {cropState}. La plante va progresser...");
+
+            // Lancer la coroutine pour gérer le délai après l’arrosage
+            StartCoroutine(ProgressionApresArrosage());
         }
-        else if (!estArrose)
+        else
         {
-            Debug.Log("Impossible de planter : le sol n'est pas arrose !");
+            Debug.Log("L'état actuel ne permet pas d'arroser davantage.");
         }
     }
 
-    void PasserUnJour()
+    IEnumerator ProgressionApresArrosage()
     {
-        if (aGraine && !planteMature)
-        {
-            joursDepuisPlantation++;
+        // Affiche un message indiquant que la plante pousse
+        Debug.Log("La plante est en train de pousser...");
 
-            if (joursDepuisPlantation >= 3) // La plante met 3 jours a pousser
-            {
-                planteMature = true;
-                spriteRenderer.sprite = spritePlanteMature;
-                Debug.Log("Plante mature !");
-            }
+        // Cooldown pour simuler le temps de croissance
+        yield return new WaitForSeconds(3f); // Temps d’attente de 3 secondes
+
+        // Passer à l’étape suivante après le délai
+        currentStage++;
+
+        if (currentStage == 1)
+        {
+            cropState = CropState.Growing;
+            spriteRenderer.sprite = cropStages[currentStage + 3]; // Sprite de la germination
+            Debug.Log("La graine a germé !");
+        }
+        else if (currentStage == 2)
+        {
+            cropState = CropState.Flowering;
+            spriteRenderer.sprite = cropStages[currentStage + 3]; // Sprite de la floraison
+            Debug.Log("La plante commence à fleurir !");
+        }
+        else if (currentStage == 3)
+        {
+            cropState = CropState.Harvestable;
+            spriteRenderer.sprite = cropStages[cropStages.Length - 1]; // Sprite de la plante mature
+            Debug.Log("La plante est prête à être récoltée !");
         }
     }
 
     void Recolter()
     {
-        if (planteMature)
+        if (cropState == CropState.Harvestable)
         {
-            planteMature = false;
-            aGraine = false;
-            estArrose = false;  // Reinitialise l'arrosage
-            spriteRenderer.sprite = spritePropre;
+            cropState = CropState.Clean;
+            spriteRenderer.sprite = cropStages[1]; // Retour à l'état sec
 
-            // Ajout à l'inventaire
-            AjouterItem("Wheat", 1);
-
-            // Mise à jour du compteur global pour le ble récolté
-            totalWheatRecolte += 1;
-
-            Debug.Log("Plante récoltée ! Vous avez collecté 1 Wheat.");
-            Debug.Log("Terrain prêt à être arrosé.");
-            Debug.Log($"Total Wheat récolté: {totalWheatRecolte}");
-
-            // Appel à la méthode pour afficher l'item dans l'inventaire
-            playerInventory.AddItemToInventory();  // Ajoute l'item dans l'inventaire visuel
-        }
-        else
-        {
-            Debug.Log("Rien à récolter !");
+            // Ajoute l’item dans l’inventaire
+            AjouterItem(cropName, 1);
+            Debug.Log($"{cropName} récolté !");
         }
     }
 
@@ -178,7 +182,7 @@ public class TileInteraction : MonoBehaviour
             inventory[item] = quantite;
         }
 
-        Debug.Log($"{quantite} {item}(s) ajouté(s) à l'inventaire. Total: {inventory[item]}.");
+        Debug.Log($"{quantite} {item}(s) ajouté(s) à l’inventaire. Total: {inventory[item]}.");
     }
 
     public void AfficherInventaire()
