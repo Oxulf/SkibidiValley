@@ -1,5 +1,5 @@
 [System.Serializable]
 public class Sauvegarde
 {
-    public Inventaire inventaire; // L'inventaire à sauvegarder
+    public Inventaire inventaire; // L'inventaire ï¿½ sauvegarder
 }
