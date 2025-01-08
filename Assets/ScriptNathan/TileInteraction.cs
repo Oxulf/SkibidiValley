@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class TileInteraction : MonoBehaviour
 {
+    public PlayerInventory playerInventory;
     public Sprite[] cropStages; // Array des sprites pour chaque étape
     public string cropName = ""; // Nom de la culture
     public int[] daysPerStage; // Nombre de jours nécessaires par étape
@@ -156,11 +157,24 @@ public class TileInteraction : MonoBehaviour
         if (cropState == CropState.Harvestable)
         {
             cropState = CropState.Clean;
-            spriteRenderer.sprite = cropStages[1]; // Retour à l'état sec
+            spriteRenderer.sprite = cropStages[1]; // Retour à l'état propre
 
-            // Ajoute l’item dans l’inventaire
-            AjouterItem(cropName, 1);
-            Debug.Log($"{cropName} récolté !");
+            // Ajoute l'item dans l'inventaire du joueur
+            if (playerInventory != null)
+            {
+                playerInventory.AddItemToInventory(cropName);
+                Debug.Log($"{cropName} récolté et ajouté à l'inventaire !");
+            }
+            else
+            {
+                Debug.LogWarning("Aucun inventaire global trouvé pour ajouter l'item.");
+            }
+
+            AjouterItem(cropName, 1); // Gère le stockage interne
+        }
+        else
+        {
+            Debug.Log("Rien à récolter !");
         }
     }
 

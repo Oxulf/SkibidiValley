@@ -26,12 +26,6 @@ public class PlayerInventory : MonoBehaviour
         {
             ToggleInventory();
         }
-
-        // Ajouter un item avec F (si nécessaire pour le débug)
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            AddItemToInventory();
-        }
     }
 
     void ToggleInventory()
@@ -43,9 +37,16 @@ public class PlayerInventory : MonoBehaviour
         itemsCanvas.SetActive(isInventoryOpen);
     }
 
-    public void AddItemToInventory()
+    public void AddItemToInventory(string itemName)
     {
         GameObject newItem = Instantiate(itemPrefab, itemsContainer);
+
+        // Ajoutez le nom de l'item dans le visuel
+        Text itemText = newItem.GetComponentInChildren<Text>();
+        if (itemText != null)
+        {
+            itemText.text = itemName; // Affiche le nom de l'item
+        }
 
         RectTransform rt = newItem.GetComponent<RectTransform>();
         if (rt == null)
@@ -60,6 +61,6 @@ public class PlayerInventory : MonoBehaviour
         // Forcez la mise à jour du layout
         LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
 
-        Debug.Log($"Item ajouté : Parent = {newItem.transform.parent.name}, Position = {rt.anchoredPosition}");
+        Debug.Log($"Item ajouté : {itemName}");
     }
 }

@@ -12553,7 +12553,7 @@ MonoBehaviour:
   backgroundCanvas: {fileID: 416446327}
   itemsCanvas: {fileID: 846872315}
   itemsContainer: {fileID: 412368833}
-  itemPrefab: {fileID: 6764772686900547149, guid: ef8959ad5bea0154387122966edebcf1, type: 3}
+  itemPrefab: {fileID: 1890969393354997917, guid: 0e5142f677113b2409f35ce1927f3b2c, type: 3}
 --- !u!1 &290870601
 GameObject:
   m_ObjectHideFlags: 0
@@ -16987,7 +16987,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 5, y: 5}
+  m_Spacing: {x: 4, y: 4}
   m_Constraint: 1
   m_ConstraintCount: 6
 --- !u!1 &413896024
@@ -42613,6 +42613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 0}
   cropStages: []
   cropName: Wheat
   daysPerStage: 
@@ -66349,6 +66350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 0}
   cropStages: []
   cropName: Wheat
   daysPerStage: 
@@ -76335,6 +76337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6151f8d6443bde4d95b4c37bb8e7dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 290168707}
   cropStages:
   - {fileID: 21300000, guid: 8bf80514cf3689b42b1a4b3a0d99f580, type: 3}
   - {fileID: 21300000, guid: 8ad196470b9ca9645995878e93ad7092, type: 3}
