@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [System.Serializable]
+    public class StartingItem
+    {
+        public GameObject prefab; // Prefab de l'item initial
+        public int quantity;      // Quantité initiale
+    }
+
+    public List<StartingItem> startingItems; // Liste des items initiaux
+
     public GameObject backgroundCanvas; // Référence au Canvas du background
     public GameObject itemsCanvas;      // Référence au Canvas des items
     public Transform itemsContainer;    // Référence au conteneur d'items dans le itemsCanvas
@@ -14,9 +23,18 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        // Assurez-vous que l'inventaire est fermé au début
+        // Fermez l'inventaire au départ
         backgroundCanvas.SetActive(false);
         itemsCanvas.SetActive(false);
+
+        // Ajoutez les items initiaux à l'inventaire
+        foreach (var item in startingItems)
+        {
+            for (int i = 0; i < item.quantity; i++)
+            {
+                AddItemToInventory(item.prefab);
+            }
+        }
     }
 
     void Update()
