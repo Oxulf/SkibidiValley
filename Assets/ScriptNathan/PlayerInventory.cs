@@ -65,6 +65,9 @@ public class PlayerInventory : MonoBehaviour
             if (inventory.ContainsKey(itemName))
             {
                 inventory[itemName] += quantity;
+
+                // Met à jour l'UI de l'objet existant
+                UpdateUI(itemName, inventory[itemName]);
             }
             else
             {
@@ -72,6 +75,7 @@ public class PlayerInventory : MonoBehaviour
 
                 // Crée une instance de l’item dans l’UI uniquement si c'est un nouvel objet
                 GameObject newItem = Instantiate(prefab, itemsContainer);
+                newItem.name = itemName; // Utilise le nom pour le retrouver facilement dans l'UI
 
                 RectTransform rt = newItem.GetComponent<RectTransform>();
                 if (rt == null)
@@ -82,6 +86,13 @@ public class PlayerInventory : MonoBehaviour
 
                 rt.anchoredPosition = Vector2.zero; // Centré dans le parent
                 rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
+
+                // Ajoutez un texte pour afficher la quantité
+                Text quantityText = newItem.GetComponentInChildren<Text>();
+                if (quantityText != null)
+                {
+                    quantityText.text = inventory[itemName].ToString();
+                }
 
                 // Forcez la mise à jour du layout
                 LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
@@ -114,7 +125,20 @@ public class PlayerInventory : MonoBehaviour
             if (inventory[itemName] <= 0)
             {
                 inventory[itemName] = 0;
-                Debug.Log($"L'item {itemName} a été épuisé !");
+
+                // Supprime l'objet de l'UI
+                Transform itemUI = itemsContainer.Find(itemName);
+                if (itemUI != null)
+                {
+                    Destroy(itemUI.gameObject);
+                }
+
+                Debug.Log($"L'item {itemName} a été épuisé et retiré de l'inventaire.");
+            }
+            else
+            {
+                // Met à jour l'UI de l'objet existant
+                UpdateUI(itemName, inventory[itemName]);
             }
 
             Debug.Log($"Retiré : {quantity} {itemName}(s). Restant : {inventory[itemName]}");
@@ -122,6 +146,18 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             Debug.LogWarning($"Impossible de retirer {itemName}. Vous n'en possédez pas assez !");
+        }
+    }
+    private void UpdateUI(string itemName, int quantity)
+    {
+        Transform itemUI = itemsContainer.Find(itemName);
+        if (itemUI != null)
+        {
+            Text quantityText = itemUI.GetComponentInChildren<Text>();
+            if (quantityText != null)
+            {
+                quantityText.text = quantity.ToString();
+            }
         }
     }
 }
