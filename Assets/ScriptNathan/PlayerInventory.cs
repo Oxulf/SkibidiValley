@@ -160,4 +160,13 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
+    public int GetItemQuantity(string itemName)
+    {
+        if (inventory.ContainsKey(itemName))
+        {
+            return inventory[itemName];
+        }
+
+        return 0;
+    }
 }
