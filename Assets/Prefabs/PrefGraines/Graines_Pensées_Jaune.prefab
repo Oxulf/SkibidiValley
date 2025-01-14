@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5596155293252238229}
   - component: {fileID: 8636807320751679177}
+  - component: {fileID: -8160540377775214620}
   m_Layer: 0
   m_Name: "Graines_Pens\xE9es_Jaune"
   m_TagString: Untagged
@@ -88,3 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-8160540377775214620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302833872393285307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0620f44e00384e8acc4bad5463bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedName: "Graines_Pens\xE9es_Jaune"
+  seedSprite: {fileID: 21300000, guid: e96e61cb162fb864f8b392ec7cea3ff3, type: 3}
+  harvestableSprite: {fileID: 21300000, guid: 59789c40b030b554f91b72d54ff2a6e0, type: 3}
+  harvestablePrefab: {fileID: 1890969393354997917, guid: 0e5142f677113b2409f35ce1927f3b2c, type: 3}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ActionWheelManager : MonoBehaviour
 {
+    public PlayerInventory playerInventory;
     public List<Button> buttons; // Liste des boutons de la roue, configurés dans l'éditeur
     public List<SeedPrefab> availableSeeds; // Liste des graines disponibles
     public GameObject selectedSeedPrefab; // La graine actuellement sélectionnée
@@ -51,6 +52,15 @@ public class ActionWheelManager : MonoBehaviour
     void SelectSeed(SeedPrefab seed)
     {
         selectedSeedPrefab = seed.seedPrefab;
-        Debug.Log($"Graine sélectionnée : {seed.seedName}");
+
+        if (selectedSeedPrefab != null)
+        {
+            string seedName = selectedSeedPrefab.GetComponent<SeedData>()?.seedName;
+            Debug.Log($"Graine sélectionnée : {seed.seedName}, Prefab associé : {selectedSeedPrefab.name}, Nom dans SeedData : {seedName}");
+        }
+        else
+        {
+            Debug.LogWarning("Le prefab associé à cette graine est null !");
+        }
     }
 }

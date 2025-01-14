@@ -5,14 +5,16 @@ using System.Collections.Generic;
 public class TileInteraction : MonoBehaviour
 {
     public PlayerInventory playerInventory;
-    public Sprite[] cropStages; // Array des sprites pour chaque étape
-    public string cropName = ""; // Nom de la culture
-    public int[] daysPerStage; // Nombre de jours nécessaires par étape
-    private int currentStage = 0; // Étape actuelle
+    public ActionWheelManager actionWheel;
+    public Sprite[] cropStages;
+    public int[] daysPerStage;
+    private int currentStage = 0;
+    private SeedData plantedSeedData;
+    private Sprite harvestableSprite;
+    private GameObject harvestablePrefab;
 
     private SpriteRenderer spriteRenderer;
     private bool interactionEnCours = false;
-    public GameObject itemPrefab; // Prefab associé à cette culture
 
     // Gestion de l'inventaire
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
@@ -35,12 +37,6 @@ public class TileInteraction : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = cropStages[0]; // Sprite initial (sale)
-
-        // Initialisation de l'inventaire
-        if (!inventory.ContainsKey(cropName))
-        {
-            inventory.Add(cropName, 0);
-        }
     }
 
     void Update()
@@ -102,10 +98,42 @@ public class TileInteraction : MonoBehaviour
 
     void PlanterGraine()
     {
-        cropState = CropState.Seeded;
-        currentStage = 0;
-        spriteRenderer.sprite = cropStages[3];
-        Debug.Log("Graine plantée !");
+        if (actionWheel.selectedSeedPrefab != null)
+        {
+            SeedData seedData = actionWheel.selectedSeedPrefab.GetComponent<SeedData>();
+            if (seedData != null)
+            {
+                string seedName = seedData.seedName;
+                Debug.Log($"Tentative de plantation pour : {seedName}");
+                if (playerInventory.HasItem(seedName))
+                {
+                    // Retirer la graine de l'inventaire
+                    playerInventory.RemoveItem(seedName);
+
+                    // Stocker le sprite récoltable (plante mature) et le prefab récolté
+                    harvestableSprite = seedData.harvestableSprite;
+                    harvestablePrefab = seedData.harvestablePrefab;
+
+                    // Mettre à jour l'état de la parcelle
+                    cropState = CropState.Seeded;
+                    currentStage = 0;
+                    spriteRenderer.sprite = cropStages[3];
+                    Debug.Log($"Graine {seedName} plantée !");
+                }
+                else
+                {
+                    Debug.Log($"Vous n'avez pas la graine {seedName} dans votre inventaire !");
+                }
+            }
+            else
+            {
+                Debug.LogError("Le prefab sélectionné n'a pas de script SeedData !");
+            }
+        }
+        else
+        {
+            Debug.LogError("Aucune graine valide sélectionnée !");
+        }
     }
 
     void ArroserPourPousser()
@@ -148,7 +176,7 @@ public class TileInteraction : MonoBehaviour
         else if (currentStage == 3)
         {
             cropState = CropState.Harvestable;
-            spriteRenderer.sprite = cropStages[cropStages.Length - 1];
+            spriteRenderer.sprite = harvestableSprite;
             Debug.Log("La plante est prête à être récoltée !");
         }
     }
@@ -160,18 +188,18 @@ public class TileInteraction : MonoBehaviour
             cropState = CropState.Clean;
             spriteRenderer.sprite = cropStages[1]; // Retour à l'état propre
 
-            // Ajoute l'objet récolté à l'inventaire
-            if (playerInventory != null && itemPrefab != null)
+            // Ajouter le prefab récolté à l'inventaire
+            if (harvestablePrefab != null)
             {
-                playerInventory.AddItemToInventory(itemPrefab); // Passe le prefab
-                Debug.Log($"{cropName} récolté et ajouté à l'inventaire !");
+                playerInventory.AddItemToInventory(harvestablePrefab);
+                Debug.Log($"Récolte effectuée : {harvestablePrefab.name} ajouté à l'inventaire !");
             }
             else
             {
-                Debug.LogWarning("Aucun inventaire ou prefab trouvé !");
+                Debug.LogWarning("Aucun prefab récoltable défini pour cette graine !");
             }
 
-            AjouterItem(cropName, 1); // Gestion interne
+            Debug.Log("Parcelle nettoyée et prête à être réutilisée !");
         }
     }
 

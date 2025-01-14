@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2737408898313724217}
   - component: {fileID: 4353374495060661051}
+  - component: {fileID: 388677179627576787}
   m_Layer: 0
   m_Name: Graines_Calibrachoa_Rouge
   m_TagString: Untagged
@@ -88,3 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &388677179627576787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284438005416042272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0620f44e00384e8acc4bad5463bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedName: Graines_Calibrachoa_Rouge
+  seedSprite: {fileID: 21300000, guid: e67906ecf64626642a54d94ad87e76df, type: 3}
+  harvestableSprite: {fileID: 21300000, guid: ca9489e136ac01f418417b866f2fde3a, type: 3}
+  harvestablePrefab: {fileID: 8140749402834553074, guid: 5d20dcdf0df434245962f7151f565a8b, type: 3}

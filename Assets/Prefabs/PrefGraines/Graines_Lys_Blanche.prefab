@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3003187446694612646}
   - component: {fileID: 7015122418060497702}
+  - component: {fileID: -3990492223039085411}
   m_Layer: 0
   m_Name: Graines_Lys_Blanche
   m_TagString: Untagged
@@ -88,3 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3990492223039085411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174744565472203810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0620f44e00384e8acc4bad5463bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedName: Graines_Lys_Blanche
+  seedSprite: {fileID: 21300000, guid: 7a8cadb38786cff4da19cc9bd8518b71, type: 3}
+  harvestableSprite: {fileID: 21300000, guid: 830502dabc50bc041aad8795c9bea00f, type: 3}
+  harvestablePrefab: {fileID: 4189290991249651958, guid: b688560643f3568428423431a79350b7, type: 3}

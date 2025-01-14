@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355270421423744316}
   - component: {fileID: 6088351950583270442}
+  - component: {fileID: -2156932662994422517}
   m_Layer: 0
   m_Name: Graines_Roses_Blanche
   m_TagString: Untagged
@@ -88,3 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2156932662994422517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545227411989352341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0620f44e00384e8acc4bad5463bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedName: Graines_Roses_Blanche
+  seedSprite: {fileID: 21300000, guid: 9858e70a0cb0c014085cb5c7a11ea90c, type: 3}
+  harvestableSprite: {fileID: 21300000, guid: 8d4dda0afd93f8546a239ee31909e3ca, type: 3}
+  harvestablePrefab: {fileID: 2004832368680593434, guid: 25a4d6ca13686fb40a2825449967cb2f, type: 3}

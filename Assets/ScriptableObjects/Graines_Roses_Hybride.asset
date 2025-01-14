@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a07d468be2b7994f89b3489dea6292c, type: 3}
-  m_Name: "Graines_Pens\xE9es_Jaunes"
+  m_Name: Graines_Roses_Hybride
   m_EditorClassIdentifier: 
-  seedName: "Graines_Pens\xE9es_Jaune"
-  seedSprite: {fileID: 21300000, guid: e96e61cb162fb864f8b392ec7cea3ff3, type: 3}
-  seedPrefab: {fileID: 3302833872393285307, guid: 3ac21616c8b5a604e884ff0ec82e2c02, type: 3}
+  seedName: Graines_Roses_Hybride
+  seedSprite: {fileID: 21300000, guid: 5009d5ce91247ce4dab8a42e22600c40, type: 3}
+  seedPrefab: {fileID: 3505286144616422917, guid: e6f40fcd1dbf7b64c8f2db7a166ffec2, type: 3}

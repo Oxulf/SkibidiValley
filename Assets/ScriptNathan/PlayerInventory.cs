@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
     public GameObject itemsCanvas;      // Référence au Canvas des items
     public Transform itemsContainer;    // Référence au conteneur d'items dans le itemsCanvas
     public List<GameObject> collectiblePrefabs; // Liste des prefabs récoltables
+    private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
     private bool isInventoryOpen = false; // État de l'inventaire (ouvert/fermé)
 
@@ -55,31 +56,72 @@ public class PlayerInventory : MonoBehaviour
         itemsCanvas.SetActive(isInventoryOpen);
     }
 
-    public void AddItemToInventory(GameObject prefab)
+    public void AddItemToInventory(GameObject prefab, int quantity = 1)
     {
         if (collectiblePrefabs.Contains(prefab))
         {
-            // Crée une instance de l’item dans l’UI
-            GameObject newItem = Instantiate(prefab, itemsContainer);
+            string itemName = prefab.name;
 
-            RectTransform rt = newItem.GetComponent<RectTransform>();
-            if (rt == null)
+            if (inventory.ContainsKey(itemName))
             {
-                Debug.LogError("Le prefab d'item doit avoir un RectTransform !");
-                return;
+                inventory[itemName] += quantity;
+            }
+            else
+            {
+                inventory[itemName] = quantity;
+
+                // Crée une instance de l’item dans l’UI uniquement si c'est un nouvel objet
+                GameObject newItem = Instantiate(prefab, itemsContainer);
+
+                RectTransform rt = newItem.GetComponent<RectTransform>();
+                if (rt == null)
+                {
+                    Debug.LogError("Le prefab d'item doit avoir un RectTransform !");
+                    return;
+                }
+
+                rt.anchoredPosition = Vector2.zero; // Centré dans le parent
+                rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
+
+                // Forcez la mise à jour du layout
+                LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
             }
 
-            rt.anchoredPosition = Vector2.zero; // Centré dans le parent
-            rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
-
-            // Forcez la mise à jour du layout
-            LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
-
-            Debug.Log($"Item ajouté : {prefab.name}");
+            Debug.Log($"Ajouté : {quantity} {itemName}(s). Total : {inventory[itemName]}");
         }
         else
         {
             Debug.LogWarning($"Le prefab {prefab.name} n'est pas dans la liste des items récoltables !");
+        }
+    }
+
+    public bool HasItem(string itemName)
+    {
+        Debug.Log($"Vérification de l'item : {itemName}. Inventaire actuel :");
+        foreach (var kvp in inventory)
+        {
+            Debug.Log($"{kvp.Key}: {kvp.Value}");
+        }
+        return inventory.ContainsKey(itemName) && inventory[itemName] > 0;
+    }
+
+    public void RemoveItem(string itemName, int quantity = 1)
+    {
+        if (HasItem(itemName))
+        {
+            inventory[itemName] -= quantity;
+
+            if (inventory[itemName] <= 0)
+            {
+                inventory[itemName] = 0;
+                Debug.Log($"L'item {itemName} a été épuisé !");
+            }
+
+            Debug.Log($"Retiré : {quantity} {itemName}(s). Restant : {inventory[itemName]}");
+        }
+        else
+        {
+            Debug.LogWarning($"Impossible de retirer {itemName}. Vous n'en possédez pas assez !");
         }
     }
 }

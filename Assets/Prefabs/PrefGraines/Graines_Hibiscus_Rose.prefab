@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5875737002510847723}
   - component: {fileID: 5651735134339393830}
+  - component: {fileID: -1168376707319641397}
   m_Layer: 0
   m_Name: Graines_Hibiscus_Rose
   m_TagString: Untagged
@@ -88,3 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1168376707319641397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8246114450604467615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0620f44e00384e8acc4bad5463bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedName: Graines_Hibiscus_Rose
+  seedSprite: {fileID: 21300000, guid: 8d4bb606faa724a4b83b02fd4c2760ef, type: 3}
+  harvestableSprite: {fileID: 21300000, guid: 3b378a14a7d3d214bb8687561644c54d, type: 3}
+  harvestablePrefab: {fileID: 6382222921831597590, guid: 5079b352621a88442aaffaf57da11e59, type: 3}
