@@ -7,7 +7,6 @@ public class MerchantUIController : MonoBehaviour
     private bool isPlayerNear = false;
     public PlayerInventory playerInventory;
     public MerchantInventory merchantInventory;
-
     public Transform itemsContainer;
     public GameObject itemButtonPrefab;
 
@@ -19,33 +18,28 @@ public class MerchantUIController : MonoBehaviour
         }
         DisplayMerchantItems();
     }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Key R pressed.");
         }
-
         if (isPlayerNear && Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Toggling merchant UI...");
             ToggleMerchantUI();
         }
     }
-
     void ToggleMerchantUI()
     {
         if (merchantUI != null)
         {
             bool isActive = merchantUI.activeSelf;
             merchantUI.SetActive(!isActive);
-
             if (!isActive)
             {
                 DisplayMerchantItems();
             }
-
             Debug.Log("Merchant UI is now: " + (isActive ? "Disabled" : "Enabled"));
         }
         else
@@ -53,7 +47,6 @@ public class MerchantUIController : MonoBehaviour
             Debug.LogError("Merchant UI is not assigned in the inspector!");
         }
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         Debug.Log("CollisionStay detected with: " + collision.gameObject.name);
@@ -63,7 +56,6 @@ public class MerchantUIController : MonoBehaviour
             Debug.Log("Player is near the merchant.");
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("CollisionExit detected with: " + collision.gameObject.name);
@@ -77,7 +69,6 @@ public class MerchantUIController : MonoBehaviour
             }
         }
     }
-
     void DisplayMerchantItems()
     {
         if (itemsContainer == null || itemButtonPrefab == null || merchantInventory == null)
@@ -85,12 +76,10 @@ public class MerchantUIController : MonoBehaviour
             Debug.LogError("UI Elements or Merchant inventory are not set correctly.");
             return;
         }
-
         foreach (Transform child in itemsContainer)
         {
             Destroy(child.gameObject);
         }
-
         foreach (var item in merchantInventory.itemsForSale)
         {
             GameObject button = Instantiate(itemButtonPrefab, itemsContainer);
@@ -99,7 +88,6 @@ public class MerchantUIController : MonoBehaviour
             {
                 buttonText.text = $"{item.prefab.name} - {item.price} Coins";
             }
-
             Button buttonComponent = button.GetComponent<Button>();
             if (buttonComponent != null)
             {
@@ -107,7 +95,6 @@ public class MerchantUIController : MonoBehaviour
             }
         }
     }
-
     void BuyItemFromMerchant(string itemName, int quantity)
     {
         if (merchantInventory != null && playerInventory != null)

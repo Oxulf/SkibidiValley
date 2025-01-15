@@ -12,14 +12,9 @@ public class TileInteraction : MonoBehaviour
     private SeedData plantedSeedData;
     private Sprite harvestableSprite;
     private GameObject harvestablePrefab;
-
     private SpriteRenderer spriteRenderer;
     private bool interactionEnCours = false;
-
-    // Gestion de l'inventaire
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
-
-    // État actuel de la parcelle
     private enum CropState
     {
         Dirty,
@@ -30,15 +25,12 @@ public class TileInteraction : MonoBehaviour
         Flowering,
         Harvestable
     }
-
     private CropState cropState = CropState.Dirty;
-
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = cropStages[0]; // Sprite initial (sale)
+        spriteRenderer.sprite = cropStages[0]; 
     }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && JoueurEstProche() && !interactionEnCours)
@@ -46,15 +38,13 @@ public class TileInteraction : MonoBehaviour
             StartCoroutine(GererInteractionAvecDelai());
         }
     }
-
     IEnumerator GererInteractionAvecDelai()
     {
         interactionEnCours = true;
         GererInteraction();
-        yield return new WaitForSeconds(0.5f); // Délai pour éviter une double interaction
+        yield return new WaitForSeconds(0.5f); 
         interactionEnCours = false;
     }
-
     void GererInteraction()
     {
         switch (cropState)
@@ -81,21 +71,18 @@ public class TileInteraction : MonoBehaviour
                 break;
         }
     }
-
     void Nettoyer()
     {
         cropState = CropState.Clean;
         spriteRenderer.sprite = cropStages[1];
         Debug.Log("Terrain nettoyé !");
     }
-
     void Arroser()
     {
         cropState = CropState.Watered;
         spriteRenderer.sprite = cropStages[2];
         Debug.Log("Sol arrosé !");
     }
-
     void PlanterGraine()
     {
         if (actionWheel.selectedSeedPrefab != null)
@@ -107,14 +94,9 @@ public class TileInteraction : MonoBehaviour
                 Debug.Log($"Tentative de plantation pour : {seedName}");
                 if (playerInventory.HasItem(seedName))
                 {
-                    // Retirer la graine de l'inventaire
                     playerInventory.RemoveItem(seedName);
-
-                    // Stocker le sprite récoltable (plante mature) et le prefab récolté
                     harvestableSprite = seedData.harvestableSprite;
                     harvestablePrefab = seedData.harvestablePrefab;
-
-                    // Mettre à jour l'état de la parcelle
                     cropState = CropState.Seeded;
                     currentStage = 0;
                     spriteRenderer.sprite = cropStages[3];
@@ -135,14 +117,11 @@ public class TileInteraction : MonoBehaviour
             Debug.LogError("Aucune graine valide sélectionnée !");
         }
     }
-
     void ArroserPourPousser()
     {
         if (cropState == CropState.Seeded || cropState == CropState.Growing || cropState == CropState.Flowering)
         {
             Debug.Log($"Arrosage effectué pour l'état : {cropState}. La plante va progresser...");
-
-            // Lancer la coroutine pour gérer le délai après l’arrosage
             StartCoroutine(ProgressionApresArrosage());
         }
         else
@@ -150,17 +129,11 @@ public class TileInteraction : MonoBehaviour
             Debug.Log("L'état actuel ne permet pas d'arroser davantage.");
         }
     }
-
     IEnumerator ProgressionApresArrosage()
     {
         Debug.Log("La plante est en train de pousser...");
-
-        // Cooldown pour simuler le temps de croissance
         yield return new WaitForSeconds(3f);
-
-        // Passer à l’étape suivante après le délai
         currentStage++;
-
         if (currentStage == 1)
         {
             cropState = CropState.Growing;
@@ -180,15 +153,12 @@ public class TileInteraction : MonoBehaviour
             Debug.Log("La plante est prête à être récoltée !");
         }
     }
-
     void Recolter()
     {
         if (cropState == CropState.Harvestable)
         {
             cropState = CropState.Clean;
-            spriteRenderer.sprite = cropStages[1]; // Retour à l'état propre
-
-            // Ajouter le prefab récolté à l'inventaire
+            spriteRenderer.sprite = cropStages[1]; 
             if (harvestablePrefab != null)
             {
                 playerInventory.AddItemToInventory(harvestablePrefab);
@@ -198,17 +168,14 @@ public class TileInteraction : MonoBehaviour
             {
                 Debug.LogWarning("Aucun prefab récoltable défini pour cette graine !");
             }
-
             Debug.Log("Parcelle nettoyée et prête à être réutilisée !");
         }
     }
-
     bool JoueurEstProche()
     {
         Collider2D player = Physics2D.OverlapCircle(transform.position, 1f, LayerMask.GetMask("Player"));
         return player != null;
     }
-
     public void AjouterItem(string item, int quantite)
     {
         if (inventory.ContainsKey(item))
@@ -219,10 +186,8 @@ public class TileInteraction : MonoBehaviour
         {
             inventory[item] = quantite;
         }
-
         Debug.Log($"{quantite} {item}(s) ajouté(s) à l’inventaire. Total: {inventory[item]}.");
     }
-
     public void AfficherInventaire()
     {
         Debug.Log("Inventaire :");
