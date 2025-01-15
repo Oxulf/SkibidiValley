@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class ToggleActionWheel : MonoBehaviour
 {
     public GameObject actionWheelCanvas;
+
     private bool isActionWheelOpen = false;
+
     void Start()
     {
         actionWheelCanvas.SetActive(false);
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -18,6 +21,7 @@ public class ToggleActionWheel : MonoBehaviour
             toggleActionWheel();
         }
     }
+
     void toggleActionWheel()
     {
         isActionWheelOpen = !isActionWheelOpen;

@@ -12,10 +12,12 @@ public class MerchantInventory : MonoBehaviour
     }
 
     public List<MerchantItem> itemsForSale = new List<MerchantItem>();
+
     void Start()
     {
         InitializeItems();
     }
+
     void InitializeItems()
     {
         itemsForSale.Add(new MerchantItem
@@ -75,6 +77,7 @@ public class MerchantInventory : MonoBehaviour
             price = 1
         });
     }
+
     public bool SellItem(string itemName, int quantity, PlayerInventory playerInventory)
     {
         foreach (var item in itemsForSale)
@@ -82,14 +85,18 @@ public class MerchantInventory : MonoBehaviour
             if (item.prefab.name == itemName && item.quantity >= quantity)
             {
                 int totalCost = item.price * quantity;
+
                 if (playerInventory.HasItem("Coins") && playerInventory.GetItemQuantity("Coins") >= totalCost)
                 {
                     playerInventory.RemoveItem("Coins", totalCost);
+
                     for (int i = 0; i < quantity; i++)
                     {
                         playerInventory.AddItemToInventory(item.prefab);
                     }
+
                     item.quantity -= quantity;
+
                     return true;
                 }
                 else
@@ -99,6 +106,7 @@ public class MerchantInventory : MonoBehaviour
                 }
             }
         }
+
         Debug.LogWarning($"L'item {itemName} n'est pas disponible ou en quantité insuffisante chez le marchand.");
         return false;
     }
