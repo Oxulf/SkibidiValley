@@ -8,27 +8,25 @@ public class PlayerInventory : MonoBehaviour
     [System.Serializable]
     public class StartingItem
     {
-        public GameObject prefab; // Prefab de l'item initial
-        public int quantity;      // Quantité initiale
+        public GameObject prefab;
+        public int quantity;  
     }
 
-    public List<StartingItem> startingItems; // Liste des items initiaux
+    public List<StartingItem> startingItems;
 
-    public GameObject backgroundCanvas; // Référence au Canvas du background
-    public GameObject itemsCanvas;      // Référence au Canvas des items
-    public Transform itemsContainer;    // Référence au conteneur d'items dans le itemsCanvas
-    public List<GameObject> collectiblePrefabs; // Liste des prefabs récoltables
+    public GameObject backgroundCanvas;
+    public GameObject itemsCanvas;
+    public Transform itemsContainer;
+    public List<GameObject> collectiblePrefabs;
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
-    private bool isInventoryOpen = false; // État de l'inventaire (ouvert/fermé)
+    private bool isInventoryOpen = false;
 
     void Start()
     {
-        // Fermez l'inventaire au départ
         backgroundCanvas.SetActive(false);
         itemsCanvas.SetActive(false);
 
-        // Ajoutez les items initiaux à l'inventaire
         foreach (var item in startingItems)
         {
             for (int i = 0; i < item.quantity; i++)
@@ -40,7 +38,6 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        // Ouvrir ou fermer l'inventaire avec Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();
@@ -51,7 +48,6 @@ public class PlayerInventory : MonoBehaviour
     {
         isInventoryOpen = !isInventoryOpen;
 
-        // Activer/Désactiver les deux Canvas
         backgroundCanvas.SetActive(isInventoryOpen);
         itemsCanvas.SetActive(isInventoryOpen);
     }
@@ -66,16 +62,13 @@ public class PlayerInventory : MonoBehaviour
             {
                 inventory[itemName] += quantity;
 
-                // Met à jour l'UI de l'objet existant
                 UpdateUI(itemName, inventory[itemName]);
             }
             else
             {
                 inventory[itemName] = quantity;
 
-                // Crée une instance de l’item dans l’UI uniquement si c'est un nouvel objet
                 GameObject newItem = Instantiate(prefab, itemsContainer);
-                newItem.name = itemName; // Utilise le nom pour le retrouver facilement dans l'UI
 
                 RectTransform rt = newItem.GetComponent<RectTransform>();
                 if (rt == null)
@@ -84,17 +77,15 @@ public class PlayerInventory : MonoBehaviour
                     return;
                 }
 
-                rt.anchoredPosition = Vector2.zero; // Centré dans le parent
-                rt.sizeDelta = new Vector2(100, 100); // Ajuster la taille si nécessaire
+                rt.anchoredPosition = Vector2.zero;
+                rt.sizeDelta = new Vector2(100, 100);
 
-                // Ajoutez un texte pour afficher la quantité
                 Text quantityText = newItem.GetComponentInChildren<Text>();
                 if (quantityText != null)
                 {
                     quantityText.text = inventory[itemName].ToString();
                 }
 
-                // Forcez la mise à jour du layout
                 LayoutRebuilder.ForceRebuildLayoutImmediate(itemsContainer.GetComponent<RectTransform>());
             }
 
@@ -126,7 +117,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 inventory[itemName] = 0;
 
-                // Supprime l'objet de l'UI
                 Transform itemUI = itemsContainer.Find(itemName);
                 if (itemUI != null)
                 {
@@ -137,7 +127,6 @@ public class PlayerInventory : MonoBehaviour
             }
             else
             {
-                // Met à jour l'UI de l'objet existant
                 UpdateUI(itemName, inventory[itemName]);
             }
 

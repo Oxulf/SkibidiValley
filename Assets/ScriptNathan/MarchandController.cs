@@ -3,19 +3,19 @@ using UnityEngine.UI;
 
 public class MerchantUIController : MonoBehaviour
 {
-    public GameObject merchantUI; // Canvas pour l'interface du marchand
+    public GameObject merchantUI;
     private bool isPlayerNear = false;
-    public PlayerInventory playerInventory; // Référence à l'inventaire du joueur
-    public MerchantInventory merchantInventory; // Référence à l'inventaire du marchand
+    public PlayerInventory playerInventory;
+    public MerchantInventory merchantInventory;
 
-    public Transform itemsContainer; // Conteneur des items à afficher dans l'UI du marchand
-    public GameObject itemButtonPrefab; // Préfabriqué pour le bouton des objets à vendre
+    public Transform itemsContainer;
+    public GameObject itemButtonPrefab;
 
     void Start()
     {
         if (merchantUI != null)
         {
-            merchantUI.SetActive(false); // Désactiver l'UI au démarrage
+            merchantUI.SetActive(false);
         }
         DisplayMerchantItems();
     }
@@ -43,7 +43,7 @@ public class MerchantUIController : MonoBehaviour
 
             if (!isActive)
             {
-                DisplayMerchantItems(); // Réaffiche les items à vendre lorsque l'UI est ouverte
+                DisplayMerchantItems();
             }
 
             Debug.Log("Merchant UI is now: " + (isActive ? "Disabled" : "Enabled"));
@@ -78,7 +78,6 @@ public class MerchantUIController : MonoBehaviour
         }
     }
 
-    // Affiche les objets à vendre du marchand
     void DisplayMerchantItems()
     {
         if (itemsContainer == null || itemButtonPrefab == null || merchantInventory == null)
@@ -87,20 +86,18 @@ public class MerchantUIController : MonoBehaviour
             return;
         }
 
-        // Efface les anciens boutons d'items
         foreach (Transform child in itemsContainer)
         {
             Destroy(child.gameObject);
         }
 
-        // Affiche les items à vendre
         foreach (var item in merchantInventory.itemsForSale)
         {
-            GameObject button = Instantiate(itemButtonPrefab, itemsContainer); // Crée un bouton pour chaque item à vendre
+            GameObject button = Instantiate(itemButtonPrefab, itemsContainer);
             Text buttonText = button.GetComponentInChildren<Text>();
             if (buttonText != null)
             {
-                buttonText.text = $"{item.prefab.name} - {item.price} Coins"; // Met à jour le texte du bouton
+                buttonText.text = $"{item.prefab.name} - {item.price} Coins";
             }
 
             Button buttonComponent = button.GetComponent<Button>();
@@ -111,7 +108,6 @@ public class MerchantUIController : MonoBehaviour
         }
     }
 
-    // Acheter un item au marchand
     void BuyItemFromMerchant(string itemName, int quantity)
     {
         if (merchantInventory != null && playerInventory != null)
@@ -120,7 +116,7 @@ public class MerchantUIController : MonoBehaviour
             if (success)
             {
                 Debug.Log($"Achat de {quantity} {itemName}(s) réussi.");
-                DisplayMerchantItems(); // Rafraîchit les items après l'achat
+                DisplayMerchantItems();
             }
             else
             {

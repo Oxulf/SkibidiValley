@@ -18,7 +18,7 @@ public class HybridationSystem : MonoBehaviour
 
     public int Width;
     public int Height;
-    public Crop[,] Crops; // La grille des crops
+    public Crop[,] Crops;
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class HybridationSystem : MonoBehaviour
     public void CheckForHybridization(Vector2Int position)
     {
         Crop crop = Crops[position.x, position.y];
-        if (crop.CurrentPlant == null) return; // Pas de plante ici, donc pas d'hybridation
+        if (crop.CurrentPlant == null) return;
 
         List<Crop> neighbors = GetNeighbors(position);
 
@@ -52,7 +52,7 @@ public class HybridationSystem : MonoBehaviour
         {
             if (neighbor.CurrentPlant != null &&
                 neighbor.CurrentPlant.PlantType == crop.CurrentPlant.PlantType &&
-                !neighbor.CurrentPlant.IsHybrid) // Les plantes doivent être de la même espèce
+                !neighbor.CurrentPlant.IsHybrid)
             {
                 TryHybridize(neighbors);
             }
@@ -63,14 +63,14 @@ public class HybridationSystem : MonoBehaviour
     {
         foreach (Crop emptyCrop in neighbors)
         {
-            if (emptyCrop.CurrentPlant == null) // Vérifiez si le crop est vide
+            if (emptyCrop.CurrentPlant == null)
             {
-                float chance = 1f; // 100% de chance
+                float chance = 1f;
                 if (Random.value < chance)
                 {
                     emptyCrop.CurrentPlant = new Plant
                     {
-                        PlantType = "Hybrid " + neighbors[0].CurrentPlant.PlantType, // Nom de l'hybride
+                        PlantType = "Hybrid " + neighbors[0].CurrentPlant.PlantType,
                         IsHybrid = true
                     };
                     Debug.Log($"Une plante hybride a poussé à la position {emptyCrop.Position}");
@@ -85,10 +85,10 @@ public class HybridationSystem : MonoBehaviour
         List<Crop> neighbors = new List<Crop>();
 
         Vector2Int[] directions = {
-        new Vector2Int(0, 1), // Haut
-        new Vector2Int(1, 0), // Droite
-        new Vector2Int(0, -1), // Bas
-        new Vector2Int(-1, 0) // Gauche
+        new Vector2Int(0, 1),
+        new Vector2Int(1, 0),
+        new Vector2Int(0, -1),
+        new Vector2Int(-1, 0)
     };
 
         foreach (Vector2Int dir in directions)

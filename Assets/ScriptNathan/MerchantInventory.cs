@@ -6,46 +6,78 @@ public class MerchantInventory : MonoBehaviour
     [System.Serializable]
     public class MerchantItem
     {
-        public GameObject prefab; // Prefab de l'item (l'objet que le marchand vend)
-        public int quantity;      // Quantité d'items que le marchand a
-        public int price;         // Prix de l'item
+        public GameObject prefab;
+        public int quantity;
+        public int price;
     }
 
-    public List<MerchantItem> itemsForSale = new List<MerchantItem>(); // Liste des items à vendre
+    public List<MerchantItem> itemsForSale = new List<MerchantItem>();
 
     void Start()
     {
-        // Initialiser les items du marchand
         InitializeItems();
     }
 
-    // Initialisation des items du marchand
     void InitializeItems()
     {
-        // Exemple d'items prédéfinis
         itemsForSale.Add(new MerchantItem
         {
-            prefab = Resources.Load<GameObject>("Items/Apple"), // Pré-chargement d'un objet "Apple"
+            prefab = Resources.Load<GameObject>("Items/Graines_Pensées_Jaune"),
             quantity = 10,
-            price = 5
+            price = 1
         });
 
         itemsForSale.Add(new MerchantItem
         {
-            prefab = Resources.Load<GameObject>("Items/Sword"),  // Pré-chargement d'un objet "Sword"
-            quantity = 5,
-            price = 15
+            prefab = Resources.Load<GameObject>("Items/Graines_Pensées_Bleue"),
+            quantity = 10,
+            price = 1
         });
 
         itemsForSale.Add(new MerchantItem
         {
-            prefab = Resources.Load<GameObject>("Items/Shield"), // Pré-chargement d'un objet "Shield"
-            quantity = 8,
-            price = 10
+            prefab = Resources.Load<GameObject>("Items/Graines_Calibrachoa_Jaune"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Calibrachoa_Rouge"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Hibiscus_Rose"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Hibiscus_Bleu"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Lys_Blanche"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Roses_Blanche"),
+            quantity = 10,
+            price = 1
+        });
+        itemsForSale.Add(new MerchantItem
+        {
+            prefab = Resources.Load<GameObject>("Items/Graines_Roses_Rouge"),
+            quantity = 10,
+            price = 1
         });
     }
 
-    // Acheter un item du marchand
     public bool SellItem(string itemName, int quantity, PlayerInventory playerInventory)
     {
         foreach (var item in itemsForSale)
@@ -54,19 +86,15 @@ public class MerchantInventory : MonoBehaviour
             {
                 int totalCost = item.price * quantity;
 
-                // Vérifier si le joueur a assez de pièces pour acheter
                 if (playerInventory.HasItem("Coins") && playerInventory.GetItemQuantity("Coins") >= totalCost)
                 {
-                    // Retirer les pièces du joueur
                     playerInventory.RemoveItem("Coins", totalCost);
 
-                    // Ajouter l'item au joueur
                     for (int i = 0; i < quantity; i++)
                     {
                         playerInventory.AddItemToInventory(item.prefab);
                     }
 
-                    // Réduire la quantité d'item chez le marchand
                     item.quantity -= quantity;
 
                     return true;
